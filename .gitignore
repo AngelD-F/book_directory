@@ -131,3 +131,4 @@ dmypy.json
 # Project-related
 .vscode/
 book_directoryProject/
+manage.py

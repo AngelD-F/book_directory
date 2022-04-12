@@ -11,5 +11,5 @@ class Book(models.Model):
         return self.title
 
 class BookStore(models.Model):
-    book = models.ForeignKey(Book)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
     count = models.IntegerField(default=0)
