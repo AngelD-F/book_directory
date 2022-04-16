@@ -13,3 +13,6 @@ class Book(models.Model):
 class BookStore(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     count = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.book
