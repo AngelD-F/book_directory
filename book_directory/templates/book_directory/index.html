@@ -14,7 +14,7 @@
         <ul class="list-group list-group-flush">
             {% for book in books %}
             <li class="list-group-item book-item">
-                <a class="btn w-100" href="#">
+                <a class="btn w-100" href="{% url 'book_directory:update_book' book.id %}">
                     <h6 class="text-muted">{{book.book_number}}</h6>
                     <h5 class="card-title">{{book.title}}</h5>
                     <p class="card-text">Cantidad: #</p>

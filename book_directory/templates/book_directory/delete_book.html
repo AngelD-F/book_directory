@@ -1,0 +1,20 @@
+{% extends 'book_directory/base.html' %}
+{% block content %}
+
+<div class="card mt-2">
+    <div class="card-body">
+        <h3 class="card-title">Estas seguro de eliminar este libro de la base de datos?</h3>
+        <div class="m-3">
+            <p class="card-text">Estas eliminando: <b>[{{book.book_number}}] {{book.title}}</b></p>
+
+            <form class="text-center" action method="POST">
+                {% csrf_token %}
+                <a class="btn btn-warning mx-2" href="{% url 'book_directory:update_book' book.id %}">Cancelar</a>
+
+                <button class="btn btn-danger mx-2" type="submit" name="Confirm">Borrar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
