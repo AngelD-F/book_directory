@@ -10,12 +10,13 @@
     <div class="card">
         <div class="card-header">
             <div class="row">
-                <div class="col">Total: {{book_count}}</div>
-                <form class="col" method="get">
+                <div class="col-md">Total: {{book_count}}</div>
+                <form class="col-md" method="get" name="index">
+                    <input type="hidden" name="p" value="{{request.GET.p}}"/>
                     <button type="submit" name="orderby" value="book_number" class="btn btn-primary">Ordenar por numero
                         de libro</button>
-                    <button type="submit" name="orderby" value="title" class="btn btn-primary">Ordenar por
-                        titulo</button>
+                        <button type="submit" name="orderby" value="title" class="btn btn-primary">Ordenar por
+                            titulo</button>
                 </form>
             </div>
         </div>
@@ -34,25 +35,28 @@
     {% if book_count > 10 %}
     <div class="card-footer">
         <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center pagination-color">
-                {% if pagination.is_previous %}
-                <li class="page-item">
-                    <a class="page-link" href="?p={{pagination.previous}}" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                {% endif %}
-                {% for page in pagination.pages %}
-                <li class="page-item"><a class="page-link" href="?p={{page}}">{{page}}</a></li>
-                {% endfor %}
-                {% if pagination.is_next %}
-                <li class="page-item">
-                    <a class="page-link" href="?p={{pagination.next}}" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-                {% endif %}
-            </ul>
+            <form method="get" name="index">
+                <ul class="pagination justify-content-center pagination-color">
+                    {% if pagination.is_previous %}
+                    <li class="page-item">
+                        <button type="submit" name="p" value="{{pagination.previous}}" class="page-link"
+                            aria-label="Previous" >
+                        <span aria-hidden="true">&laquo;</span></button>
+                    </li>
+                    {% endif %}
+                    {% for page in pagination.pages %}
+                    <li class="page-item"><button type="submit" name="p" value="{{page}}" class="page-link" >{{page}}</button>
+                    </li>
+                    {% endfor %}
+                    {% if pagination.is_next %}
+                    <li class="page-item">
+                        <button type="submit" name="p" value="{{pagination.next}}" class="page-link" aria-label="Next" >
+                        <span aria-hidden="true">&raquo;</span></button>
+                    </li>
+                    {% endif %}
+                    <input type="hidden" name="orderby" value="{{request.GET.orderby}}"/>
+                </ul>
+            </form>
         </nav>
     </div>
     {% endif %}
