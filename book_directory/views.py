@@ -7,14 +7,18 @@ from .filters import BookFilter
 
 # Create your views here.
 def index(request):
-    books = Book.objects.all()
-    
+    # The books most be ordered by the book number by default
+    # The first five
+    books = Book.objects.all().order_by('book_number')
+
     bookFilter = BookFilter(request.GET, queryset=Book.objects.all())
+    paginationNeeded = True
 
     ctx = {
-        "books": books,
-        "bookFilter": bookFilter,
+        'books': books,
+        'bookFilter': bookFilter,
+        'paginationNeeded': paginationNeeded
     }
 
-    return render(request, "book_directory/index.html", ctx)
+    return render(request, 'book_directory/index.html', ctx)
 

@@ -9,32 +9,21 @@
     </div>
     <div class="card">
         <div class="card-header">
-            Order by:
+            Total: {{books|length}}
         </div>
         <ul class="list-group list-group-flush">
+            {% for book in books %}
             <li class="list-group-item book-item">
-                <a class="btn" href="#">
-                    <h6 class="text-muted">N* 100</h6>
-                    <h5 class="card-title">shuu matsu nani shitemasuka isogashii desu ka sukutte moratte ii desu ka</h5>
-                    <p class="card-text">Cantidad: 50</p>
+                <a class="btn w-100" href="#">
+                    <h6 class="text-muted">{{book.book_number}}</h6>
+                    <h5 class="card-title">{{book.title}}</h5>
+                    <p class="card-text">Cantidad: #</p>
                 </a>
             </li>
-            <li class="list-group-item book-item">
-                <a class="btn" href="#">
-                    <h6 class="text-muted">N* 100</h6>
-                    <h5 class="card-title">shuu matsu nani shitemasuka isogashii desu ka sukutte moratte ii desu ka</h5>
-                    <p class="card-text">Cantidad: 50</p>
-                </a>
-            </li>
-            <li class="list-group-item book-item">
-                <a class="btn" href="#">
-                    <h6 class="text-muted">N* 100</h6>
-                    <h5 class="card-title">shuu matsu nani shitemasuka isogashii desu ka sukutte moratte ii desu ka</h5>
-                    <p class="card-text">Cantidad: 50</p>
-                </a>
-            </li>
+            {% endfor %}
         </ul>
     </div>
+    {% if paginationNeeded %}
     <div class="card-footer">
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center pagination-color">
@@ -54,5 +43,6 @@
             </ul>
           </nav>
     </div>
+    {% endif %}
 </div>
 {% endblock %}
