@@ -5,11 +5,19 @@
         <form method="get">
             {{bookFilter.form}}
             <button class="btn btn-primary" type="submit">Search</button>
-          </form>
+        </form>
     </div>
     <div class="card">
         <div class="card-header">
-            Total: {{books|length}}
+            <div class="row">
+                <div class="col">Total: {{book_count}}</div>
+                <form class="col" method="get">
+                    <button type="submit" name="orderby" value="book_number" class="btn btn-primary">Ordenar por numero
+                        de libro</button>
+                    <button type="submit" name="orderby" value="title" class="btn btn-primary">Ordenar por
+                        titulo</button>
+                </form>
+            </div>
         </div>
         <ul class="list-group list-group-flush">
             {% for book in books %}
@@ -23,25 +31,29 @@
             {% endfor %}
         </ul>
     </div>
-    {% if paginationNeeded %}
+    {% if book_count > 10 %}
     <div class="card-footer">
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center pagination-color">
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span>
-                </a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-                </a>
-              </li>
+                {% if pagination.is_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?p={{pagination.previous}}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                {% endif %}
+                {% for page in pagination.pages %}
+                <li class="page-item"><a class="page-link" href="?p={{page}}">{{page}}</a></li>
+                {% endfor %}
+                {% if pagination.is_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?p={{pagination.next}}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                {% endif %}
             </ul>
-          </nav>
+        </nav>
     </div>
     {% endif %}
 </div>
