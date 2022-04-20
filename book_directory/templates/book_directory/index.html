@@ -12,7 +12,7 @@
             <div class="row">
                 <div class="col-md">Total: {{book_count}}</div>
                 <form class="col-md" method="get" name="index">
-                    <input type="hidden" name="p" value="{{request.GET.p}}"/>
+                    <input type="hidden" name="p" value="{{request.GET.p|default:'1'}}"/>
                     <button type="submit" name="orderby" value="book_number" class="btn btn-primary">Ordenar por numero
                         de libro</button>
                         <button type="submit" name="orderby" value="title" class="btn btn-primary">Ordenar por
@@ -26,7 +26,7 @@
                 <a class="btn w-100" href="{% url 'book_directory:update_book' book.id %}">
                     <h6 class="text-muted">{{book.book_number}}</h6>
                     <h5 class="card-title">{{book.title}}</h5>
-                    <p class="card-text">Cantidad: #</p>
+                    <p class="card-text">Cantidad: {{book.count}}</p>
                 </a>
             </li>
             {% endfor %}
@@ -54,7 +54,7 @@
                         <span aria-hidden="true">&raquo;</span></button>
                     </li>
                     {% endif %}
-                    <input type="hidden" name="orderby" value="{{request.GET.orderby}}"/>
+                    <input type="hidden" name="orderby" value="{{request.GET.orderby|default:'book_number'}}"/>
                 </ul>
             </form>
         </nav>
